@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="6.jpg" type="image/6.jpg">
+  <meta charset="UTF-8">
+  <title>All Buyers</title>
+  <style>
+    .button-container {
+  display: flex;
+  justify-content: left;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.nav-button {
+  background-color: #444;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+  background-color: #666;
+}
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #444;
+      text-align: left;
+    }
+    th {
+      background: #222;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .total-count {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+    .hidden {
+      display: none;
+    }
+    input, button {
+      padding: 10px;
+      border-radius: 5px;
+      margin: 5px;
+    }
+    .admin-login {
+      text-align: center;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Admin Login -->
+<div id="login-section" class="admin-login">
+  <h2>Admin Login</h2>
+  <form id="login-form">
+    <label for="username" style="display:none;">Username</label>
+    <input type="text" id="username" name="username" placeholder="Username" required><br>
+
+    <label for="password" style="display:none;">Password</label>
+    <input type="password" id="password" name="password" placeholder="Password" required><br>
+
+    <button type="submit" id="login-btn"
+      style="background:#8A784E;color:#EFE4D2;padding:10px 20px;border:none;border-radius:8px;font-size:16px;cursor:pointer;">
+      Login
+    </button>
+    <p id="error-msg" style="color:red; display:none;">Invalid credentials!</p>
+  </form>
+</div>
+
+  
+
+  <!-- Admin Buttons -->
+  <div id="admin-section" style="display:none;">
+    <h1 style="text-align: center;">Admin Navigation</h1>
+
+    <div class="button-container" style="margin-top: 30px;">
+      <a href="buyers.html" class="nav-button">Full Payment</a>
+      <a href="buyers-partial.html" class="nav-button">Partial Payment</a>
+      <a href="buyers-sponsor.html" class="nav-button">Sponsor A Ticket</a>
+      <a href="buyers-FP-sponsor.html" class="nav-button">Sponsor A Cash Payment Ticket</a>
+    </div>
+  </div>
+
+  <style>
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .nav-button {
+      background-color: #444;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      font-size: 16px;
+    }
+
+    .nav-button:hover {
+      background-color: #666;
+    }
+  </style>
+
+  <script>
+    const adminUser = "YM_Admin"; // user //
+  const adminPass = "YM_Admin123"; // password //
+
+  document.getElementById("login-form").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const user = document.getElementById("username").value.trim();
+    const pass = document.getElementById("password").value.trim();
+
+    if (user === adminUser && pass === adminPass) {
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("admin-section").style.display = "block";
+    } else {
+      document.getElementById("error-msg").style.display = "block";
+    }
+  });
+  </script>
+</body>
+
+</html>

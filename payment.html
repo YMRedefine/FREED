@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" href="6.jpg" type="image/6.jpg">
+  <title>Payment</title>
+  <style> 
+    body {
+      font-family: 'Arial Black', sans-serif;
+      background-image: url('BG.png');
+      background-repeat: repeat;
+      background-size: cover;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    button {
+      background-color: #8A784E;
+      color: #EFE4D2;
+      border: none;
+      padding: 5px 10px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }    
+    .container, .payment {
+      max-width: 400px;
+      margin: auto;
+      background-color: #4B352A;
+      border-radius: 15px;
+      padding: 20px;
+      display: block;
+    }    
+    #get-tickets {
+      margin-top: 20px;
+      background-color: #8A784E;
+      color: #EFE4D2;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 18px;
+    }    
+    input {
+      padding: 10px;
+      border-radius: 8px;
+      width: 90%;
+      border: none;
+      margin-bottom: 15px;
+    }
+    img.qr {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    a.link {
+      color: #00f0ff;
+      display: inline-block;
+      margin-top: 15px;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Payment View -->
+  <div class="payment" id="payment-container">
+    <h1>PAYMENT</h1>
+    <p>Total Amount: <strong id="total-amount">₱0</strong></p>
+
+    <!-- Buyer Info Inputs -->
+    <input type="text" id="fullname" placeholder="Full Name" required><br>
+    <input type="email" id="email" placeholder="Email Address" required><br>
+
+    <!-- QR Code Image -->
+    <img src="1.png" alt="Payment QR Codes" class="qr">
+
+    <!-- Upload + Confirm in one button -->
+    <p style="font-weight: bold;">Upload your proof of payment:</p>
+    <button onclick="uploadAndConfirm()" id="proof-btn">Upload Proof</button>
+
+    <!-- Submit Button -->
+    <div id="submit-wrapper" style="margin-top: 20px; display: none;">
+      <button onclick="finishPayment()">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    let hasUploadedProof = false;
+
+    // Load ticket data from localStorage
+    const rawCounts = JSON.parse(localStorage.getItem("ticketCounts") || "{}");
+    const total = localStorage.getItem("ticketTotal") || 0;
+
+    // Map nonstudent -> adult
+    const counts = {
+      student: rawCounts.student || 0,
+      adult: rawCounts.adult || 0
+    };
+
+    // Display total
+    document.getElementById("total-amount").innerText = `₱${total}`;
+
+    function uploadAndConfirm() {
+      window.open("https://forms.gle/es3AhvKGfW3NWXVVA", "_blank");
+      hasUploadedProof = true;
+      document.getElementById("proof-btn").innerText = "Proof Uploaded ✅";
+      document.getElementById("proof-btn").disabled = true;
+      document.getElementById("submit-wrapper").style.display = "block";
+    }
+
+    function finishPayment() {
+      const name = document.getElementById("fullname").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+      if (!hasUploadedProof) {
+        alert("Please upload your proof of payment first.");
+        return;
+      }
+
+      if (name === "" || email === "") {
+        alert("Please enter your full name and email.");
+        return;
+      }
+
+      const buyer = {
+        name,
+        email,
+        student: counts.student,
+        adult: counts.adult,
+        total: total,
+        timestamp: new Date().toLocaleString(),
+        proofStatus: "Uploaded via Google Form"
+      };
+
+      const existing = JSON.parse(localStorage.getItem("ticketBuyers") || "[]");
+      existing.push(buyer);
+      localStorage.setItem("ticketBuyers", JSON.stringify(existing));
+
+      alert("Thank you! Your ticket has been recorded.");
+      window.location.href = "ticket_FAQs.html";
+    }
+  </script>
+</body>
+</html>

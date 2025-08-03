@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="6.jpg" type="image/6.jpg">
+        <title>TICKET</title>
+        <style>
+            body {
+            font-family: 'Arial Black', sans-serif;
+            background-image: url('BG.png');
+            background-repeat: repeat;
+            background-size: cover;
+            color: #fff8dc;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            }
+            
+            .T img {
+            width: 95%;
+            height: 300px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            }
+            .T {
+    width: auto;
+    height: auto;
+    margin: auto;
+    text-align: center;
+    background: transparent;  /* <- This blends with the page */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: none;
+}
+
+            .main-content {
+            padding-top: 60px;
+            }
+            .faq-container {
+            width: 400px;
+            background: #3B3030;
+            padding: 20px;
+            border-radius: 10px;
+            margin: auto;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-align: left;
+            }  
+            .faq-question {
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 0;
+            }
+            .faq-answer {
+            display: none;
+            margin-bottom: 10px;
+            padding-left: 10px;
+            }
+            .screenshot-note {
+    background-color: #3B3030;       /* Light beige background */
+    color: #fff8dc;                  /* Dark brown text */
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: fit-content;
+    margin: 20px auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+.screenshot-box {
+    background-color: #3B3030;       /* Light beige */
+    color: #fff8dc;                  /* Text color */
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    width: fit-content;
+    margin: 20px auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.screenshot-box #submit-time {
+    font-size: 0.9rem;
+    font-weight: normal;
+    margin-top: 8px;
+    color: #fff8dc;
+}
+
+
+        </style>
+    </head>
+    <body>
+            <div class="T">
+                <div class="ticket-img">
+                    <br>
+                    <br>
+                    <img src="5.png" alt="TICKET" style="width: 100%; max-width: 500px; height: auto; border-radius: 15px; display: block; margin: 0 auto;">
+                    
+                </div>
+                <div class="screenshot-box">
+                <p>📸 Screenshot this Ticket Please! <br> <br>Once you've taken the screenshot, kindly look for Alexa Pidlaoan to proceed with the payment.</p>
+                <p id="submit-time"></p>
+            </div>
+                
+        
+        <div class="FAQ">
+            <div class="faq-container">
+                <h2 style="text-align:center">FAQs</h2>
+
+                <div class="faq-question" onclick="toggleFaq(this)">1. Where is the Anniversary happening?</div>
+                <div class="faq-answer">"Sureshot Sportsville, Abad Santos Avenue, Tondo, Manila"</div>
+
+                <div class="faq-question" onclick="toggleFaq(this)">2. When is the Anniversary happening?</div>
+                <div class="faq-answer">"October 19, 2025"</div>
+
+                <div class="faq-question" onclick="toggleFaq(this)">3. Who can attend FREED (YM's 50th Anniversary)?</div>
+                <div class="faq-answer">"ALUMNIs of Youth Ministry and current YM Tribe"</div>
+
+                <div class="faq-question" onclick="toggleFaq(this)">4. What's included in the cost of my registration?</div>
+                <div class="faq-answer">"Your registration fee includes access to the Venue, Food, Photobooth and Merch."</div>
+
+                <div class="faq-question" onclick="toggleFaq(this)">5. Can I attend online or see the Anniversary on demand?</div>
+                <div class="faq-answer">"Unfortunately, online livestreaming is not available this time."</div>
+
+                <div class="faq-question" onclick="toggleFaq(this)">6. How much is the ticket?</div>
+                <div class="faq-answer">"The registration fee is Php 750 each for students and Php 1,000 each for adults. 
+                    For those who wish to sponsor, you may do so at Php 1,000 per sponsorship."</div>
+
+                <div class="faq-question" onclick="toggleFaq(this)">7. Can I pay in cash on site during Sunday services?</div>
+                <div class="faq-answer">"Yes. Go to Manila Faith Lobby after 10am service and look for Alexa Pidlaoan."</div>
+
+                <div class="faq-question" onclick="toggleFaq(this)">8. What if I suddenly cannot attend? Can I cancel or transfer?</div>
+                <div class="faq-answer">"Tickets are non-refundable but transferrable. Contact us via messenger: @ymredefine"</div>
+
+                <div class="faq-question" onclick="toggleFaq(this)">9. When does the registration close?</div>
+                <div class="faq-answer">"Registration closes on October 12, 2025. Secure your slot early!"</div>
+
+                <div class="faq-question" onclick="toggleFaq(this)">10. Are walk-ins allowed?</div>
+                <div class="faq-answer">"Walk-ins are not allowed to ensure proper accommodation."</div>
+
+                <div class="faq-question" onclick="toggleFaq(this)">11. Can I sponsor tickets?</div>
+                <div class="faq-answer">"Yes! Use the “Sponsor a ticket” section on this website and include their names."</div>
+
+                <div class="faq-question" onclick="toggleFaq(this)">12. I want to support the Anniversary. How?</div>
+                <div class="faq-answer">"Message us on FB: @ymredefine. Our team will accommodate your support ideas."</div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    <script>
+    function toggleFaq(el) {
+    const answer = el.nextElementSibling;
+     answer.style.display = answer.style.display === "block" ? "none" : "block";
+    }
+
+    // time and date //
+    window.addEventListener("DOMContentLoaded", function () {
+        const timeElement = document.getElementById("submit-time");
+        const now = new Date();
+
+        const options = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+        };
+
+        timeElement.textContent = "Submitted on: " + now.toLocaleString("en-US", options);
+    });
+    </script>
+
+    </body>
+
+
+
+
+
+
+
+
+</html>

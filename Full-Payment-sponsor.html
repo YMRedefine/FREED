@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" href="6.jpg" type="image/6.jpg">
+  <title>Sponsorship</title>
+  <style>
+    body {
+      font-family: 'Arial Black', sans-serif;
+      background-image: url('BG.png');
+      background-repeat: repeat;
+      background-size: cover;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    button {
+      background-color: #8A784E;
+      color: #EFE4D2;
+      border: none;
+      padding: 8px 16px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .container, .payment {
+      max-width: 400px;
+      margin: auto;
+      background-color: #4B352A;
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 8px;
+      width: 90%;
+      border: none;
+      margin-bottom: 15px;
+    }
+
+    img.qr {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    a.link {
+      color: #00f0ff;
+      display: inline-block;
+      margin-top: 15px;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="payment" id="payment-container">
+  <h1>PAYMENT</h1>
+
+  <!-- Buyer Info Inputs -->
+  <input type="text" id="fullname" placeholder="Full Name" required><br>
+  <input type="email" id="email" placeholder="Email Address" required><br>
+  <input type="text" id="sponsor-name" placeholder="Name of the person you want to sponsor (Optional)"><br>
+  <input type="number" id="sponsor-amount" placeholder="Amount you want to pay (min ₱500)" required><br>
+
+  <!-- Submit Button -->
+  <div id="submit-wrapper" style="margin-top: 20px;">
+    <button onclick="finishPayment()">Submit</button>
+  </div>
+</div>
+
+<script>
+  function finishPayment() {
+    const name = document.getElementById("fullname").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const sponsorName = document.getElementById("sponsor-name").value.trim();
+    const sponsorAmount = parseFloat(document.getElementById("sponsor-amount").value);
+
+    if (!name || !email || isNaN(sponsorAmount)) {
+      alert("Please fill out all fields correctly.");
+      return;
+    }
+
+    if (sponsorAmount < 500) {
+      alert("Sponsorship amount must be at least ₱500.");
+      return;
+    }
+
+    const buyer = {
+      name,
+      email,
+      sponsorName,
+      amount: sponsorAmount,
+      timestamp: new Date().toLocaleString()
+    };
+
+    const existing = JSON.parse(localStorage.getItem("fullPaymentBuyers") || "[]");
+    existing.push(buyer);
+    localStorage.setItem("fullPaymentBuyers", JSON.stringify(existing));
+
+
+
+    // Redirect after submission
+    window.location.href = "partial-FAQs.html";
+  }
+</script>
+
+</body>
+</html>

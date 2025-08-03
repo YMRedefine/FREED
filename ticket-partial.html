@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="6.jpg" type="image/6.jpg">
+  <meta charset="UTF-8">
+  <title>Tickets</title>
+  <style>
+    body {
+      font-family: 'Arial Black', sans-serif;
+      background-image: url('BG.png');
+      background-repeat: repeat;
+      background-size: cover;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .admin-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #8A784E;
+      color: #EFE4D2;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background-color: #4B352A;
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 36px;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
+
+    .ticket-type {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #8A784E;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
+    .ticket-info {
+      text-align: left;
+    }
+
+    .ticket-price {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .counter {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    button {
+      background-color: #4B352A;
+      color: #EFE4D2;
+      border: none;
+      padding: 5px 10px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #get-tickets {
+      margin-top: 20px;
+      background-color: #8A784E;
+      color: #EFE4D2;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ticket Selection -->
+  <div class="container" id="ticket-container">
+    <h1>PARTIAL/FULL PAY TICKETS</h1>
+
+    <div class="ticket-type">
+      <div class="ticket-info">
+        <div>STUDENT</div>
+        <div class="ticket-price">₱750.00</div>
+      </div>
+      <div class="counter">
+        <button onclick="changeCount('student', -1)">-</button>
+        <span id="student-count">0</span>
+        <button onclick="changeCount('student', 1)">+</button>
+      </div>
+    </div>
+
+    <div class="ticket-type">
+      <div class="ticket-info">
+        <div>ADULT</div>
+        <div class="ticket-price">₱1,000.00</div>
+      </div>
+      <div class="counter">
+        <button onclick="changeCount('adult', -1)">-</button>
+        <span id="adult-count">0</span>
+        <button onclick="changeCount('adult', 1)">+</button>
+      </div>
+    </div>
+
+    <!-- Button to go to partial payment page -->
+    <form action="pay-partial.html" method="GET" onsubmit="return storeTicketSelection();">
+      <button id="get-tickets" type="submit">PROCEED TO PAYMENT</button>
+    </form>
+  </div>
+
+  <script>
+    const counts = {
+      student: 0,
+      adult: 0
+    };
+
+    function changeCount(type, value) {
+      counts[type] += value;
+      if (counts[type] < 0) counts[type] = 0;
+      document.getElementById(`${type}-count`).innerText = counts[type];
+    }
+
+    function storeTicketSelection() {
+      const total = counts.student * 750 + counts.adult * 1000;
+
+      if (total === 0) {
+        alert("Please select at least one ticket.");
+        return false;
+      }
+
+      localStorage.setItem("ticketCounts", JSON.stringify(counts));
+      localStorage.setItem("ticketTotal", total);
+      return true;
+    }
+  </script>
+
+</body>
+</html>

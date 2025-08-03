@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="6.jpg" type="image/6.jpg">
+  <meta charset="UTF-8">
+  <title>Full Payment Buyers</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 28px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #444;
+      text-align: left;
+    }
+    th {
+      background: #222;
+    }
+    .total-count {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Full Payment Buyers</h1>
+  <div class="total-count" id="total-count">Total Buyers: 0</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Sponsored For</th>
+        <th>Amount</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody id="buyer-list"></tbody>
+  </table>
+
+  <div style="margin-top: 30px;"> 
+    <button onclick="location.href='buyers-partial.html'" 
+      style="background:#8A784E;color:#EFE4D2;padding:10px 20px;border:none;border-radius:8px;font-size:16px;cursor:pointer;">
+      Partial Payment List</button>
+
+    <button onclick="location.href='buyers-sponsor.html'" 
+      style="background:#8A784E;color:#EFE4D2;padding:10px 20px;border:none;border-radius:8px;font-size:16px;cursor:pointer;">
+      Sponsor Ticket List</button>
+
+    <button onclick="location.href='ticket.html'" 
+      style="background:#8A784E;color:#EFE4D2;padding:10px 20px;border:none;border-radius:8px;font-size:16px;cursor:pointer;">
+      Ticket Page</button>
+
+    <button onclick="location.href='sponsor_ticket.html'" 
+      style="background:#8A784E;color:#EFE4D2;padding:10px 20px;border:none;border-radius:8px;font-size:16px;cursor:pointer;">
+      Sponsor Ticket Page</button>
+
+    <button onclick="location.href='ticket_FAQs.html'" 
+      style="background:#8A784E;color:#EFE4D2;padding:10px 20px;border:none;border-radius:8px;font-size:16px;cursor:pointer;">
+      FAQs Page</button>
+  </div>
+
+  <script>
+    function loadBuyers() {
+      const buyers = JSON.parse(localStorage.getItem("fullPaymentBuyers") || "[]");
+      const buyerList = document.getElementById("buyer-list");
+
+      buyers.forEach((buyer, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${buyer.name}</td>
+          <td>${buyer.email}</td>
+          <td>${buyer.sponsorName || '-'}</td>
+          <td>₱${buyer.amount}</td>
+          <td>${buyer.timestamp}</td>
+        `;
+        buyerList.appendChild(row);
+      });
+
+      document.getElementById("total-count").innerText = "Total Buyers: " + buyers.length;
+    }
+
+    window.onload = loadBuyers;
+  </script>
+
+</body>
+</html>

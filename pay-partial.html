@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="6.jpg" type="image/6.jpg">
+  <title>Payment</title>
+  <style>
+    body {
+      font-family: 'Arial Black', sans-serif;
+      background-image: url('BG.png');
+      background-repeat: repeat;
+      background-size: cover;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    button {
+      background-color: #8A784E;
+      color: #EFE4D2;
+      border: none;
+      padding: 8px 16px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .container, .payment {
+      max-width: 400px;
+      margin: auto;
+      background-color: #4B352A;
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 8px;
+      width: 90%;
+      border: none;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="payment" id="payment-container">
+  <h1>PARTIAL/FULL PAY PAYMENT</h1>
+
+  <input type="text" id="fullname" placeholder="Full Name" required><br>
+  <input type="email" id="email" placeholder="Email Address" required><br>
+  <input type="number" id="amount" placeholder="Enter Partial Amount" required><br>
+
+  <div id="submit-wrapper" style="margin-top: 20px;">
+    <button onclick="submitPartial()">Submit</button>
+  </div>
+</div>
+
+<script>
+  function submitPartial() {
+    const name = document.getElementById("fullname").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const amount = parseFloat(document.getElementById("amount").value);
+
+    if (!name || !email || isNaN(amount)) {
+      alert("Please fill out all fields correctly.");
+      return;
+    }
+
+    const counts = JSON.parse(localStorage.getItem("ticketCounts") || "{}");
+
+    const buyer = {
+      name,
+      email,
+      student: counts.student || 0,
+      adult: counts.adult || 0,
+      partialAmount: amount,
+      timestamp: new Date().toLocaleString()
+    };
+
+    const existing = JSON.parse(localStorage.getItem("partialBuyers") || "[]");
+    existing.push(buyer);
+    localStorage.setItem("partialBuyers", JSON.stringify(existing));
+
+    
+    window.location.href = "partial-FAQs.html";
+  }
+</script>
+
+</body>
+</html>
