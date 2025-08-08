@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
+  <link rel="icon" href="6.jpg" type="image/6.jpg">
     <div style="text-align: right; margin: 10px 20px 0 0;">
   <a href="buyers-home.html" class="admin-button">Admin</a>
 </div>  
 <head>
-  <link rel="icon" href="6.jpg" type="image/6.jpg">
   <header><div class="header-container">
   <img src="3.png" class="header-image">
 </div></header>
@@ -145,27 +145,15 @@
 }
 
   </style>
-
-    <meta name="google-site-verification" content="5ySoxNRJYT5jjcWeqRbcMFSplWF2Go9QrCLnI1wce88" />
-    
 </head>
 <body>
 
 
   <div class="button-container">
     <button class="nav-button" onclick="showPopup('ticket')">GET TICKET</button>
-    <button class="nav-button" onclick="showPopup('sponsor')">SPONSOR A TICKET</button>
   </div>
 
-  <!-- Ticket Modal -->
-  <div id="ticket-popup" class="modal">
-    <div class="modal-content">
-      <h3>Choose Payment Option</h3>
-      <button onclick="window.location.href='ticket.html'">Online Full Payment</button>
-      <button onclick="window.location.href='ticket-partial.html'">Partial / Full Payment</button><br><br>
-      <button class="cancel-btn" onclick="closePopup('ticket-popup')">Cancel</button>
-    </div>
-  </div>
+  
 
   <!-- Sponsor Info Modal -->
 <div id="sponsor-info-popup" class="modal">
@@ -235,13 +223,7 @@
 
 
   <script>
-    function showPopup(type) {
-  if (type === 'ticket') {
-    document.getElementById('ticket-popup').style.display = 'flex';
-  } else if (type === 'sponsor') {
-    document.getElementById('sponsor-info-popup').style.display = 'flex';
-  }
-}
+    
 
 function proceedToSponsorOptions() {
   closePopup('sponsor-info-popup');
@@ -258,8 +240,15 @@ function proceedToSponsorOptions() {
     const answer = el.nextElementSibling;
     answer.style.display = answer.style.display === "block" ? "none" : "block";
   }
+
+  function showPopup() {
+      window.open("https://forms.gle/es3AhvKGfW3NWXVVA", "_blank");
+      hasUploadedProof = true;
+      document.getElementById("proof-btn").innerText = "Proof Uploaded ✅";
+      document.getElementById("proof-btn").disabled = true;
+      document.getElementById("submit-wrapper").style.display = "block";
+    }
   </script>
 
 </body>
 </html>
-
